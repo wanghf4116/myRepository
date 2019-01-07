@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.gson.oasys.mappers.KanBanMapper">
+	<!-- 判断三个条件 1、外部分类是否为空 2、字母值是否为空 3、关键字是否为空 -->
+	<update id="updatekanban"
+		parameterType="cn.gson.oasys.model.entity.kanban.KanBan">
+		update aoa_kanban 
+ <trim prefix="set" suffixOverrides=",">
+		state = #{state},
+		work_date = #{work_date},
+		group_next = #{group_next},
+		group_personnel = #{group_personnel},
+		scheduled_time = #{scheduled_time, jdbcType=TIMESTAMP},
+		work_id = #{work_id},
+		completion_time = #{completion_time, jdbcType=TIMESTAMP},
+		results=#{results},
+		personnel = #{personnel},
+		confirmed_by = #{confirmed_by},
+		work_start_time = #{work_start_time, jdbcType=TIMESTAMP},
+		work_end_time = #{work_end_time, jdbcType=TIMESTAMP},
+		delivery = #{delivery, jdbcType=TIMESTAMP},
+		delivery_rate = #{delivery_rate},
+		remark = #{remark},
+		</trim>
+		
+		where kanbanid = #{kanbanid}
+	</update>
+
+
+</mapper>
