@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.ruoyi.project.system.kanban.mapper.KanBanMapper">
+
+	<resultMap type="KanBan" id="KanBanResult">
+		<id 	property="kanban_id"		column="kanban_id" />
+		<result property="state_id"			column="state_id" />
+		<result property="work_date" 		column="work_date" />
+		<result property="group_next" 		column="group_next" />
+		<result property="group_personnel" 	column="group_personnel" />
+		<result property="scheduled_time" 	column="scheduled_time" />
+		<result property="work_id"			column="work_id" />
+		<result property="completion_time"	column="completion_time" />
+		<result property="results" 			column="results" />
+		<result property="personnel"		column="personnel" />
+		<result property="confirmed_by"		column="confirmed_by" />
+		<result property="work_start_time"	column="work_start_time" />
+		<result property="work_end_time"	column="work_end_time" />
+		<result property="delivery"			column="delivery" />
+		<result property="delivery_rate"	column="delivery_rate" />
+		<result property="remark"			column="remark" />
+		<result property="update_time"		column="update_time" />
+		<result property="update_user"		column="update_user" />
+	</resultMap>
+
+	<sql id="selectKanBanVo">
+		select kanban_id, state_id, work_date, group_next, group_personnel, scheduled_time,
+		work_id,completion_time,results,personnel,confirmed_by,work_start_time,
+		work_end_time,delivery,delivery_rate, remark,update_time,update_user
+		from aoa_kanban
+	</sql>
+
+	<select id="selectKanBanList" parameterType="KanBan"
+		resultMap="KanBanResult">
+		<include refid="selectKanBanVo" />
+		<where>
+			<if test="group_next != null and group_next != ''">
+				AND group_next =#{group_next}
+			</if>
+		</where>
+	</select>
+<!--  
+	<select id="selectPostAll" resultMap="PostResult">
+		<include refid="selectPostVo" />
+	</select>
+
+	<select id="selectPostsByUserId" parameterType="Long"
+		resultMap="PostResult">
+		SELECT p.post_id, p.post_name, p.post_code
+		FROM sys_user u
+		LEFT JOIN sys_user_post up ON u.user_id = up.user_id
+		LEFT JOIN sys_post p ON up.post_id = p.post_id
+		WHERE up.user_id = #{userId}
+	</select>
+
+	<select id="selectPostById" parameterType="Long"
+		resultMap="PostResult">
+		<include refid="selectPostVo" />
+		where post_id = #{postId}
+	</select>
+
+	<select id="checkPostNameUnique" parameterType="String"
+		resultMap="PostResult">
+		<include refid="selectPostVo" />
+		where post_name=#{postName}
+	</select>
+
+	<select id="checkPostCodeUnique" parameterType="String"
+		resultMap="PostResult">
+		<include refid="selectPostVo" />
+		where post_code=#{postCode}
+	</select>
+
+	<delete id="deletePostByIds" parameterType="Long">
+		delete from sys_post where post_id in
+		<foreach collection="array" item="postId" open="("
+			separator="," close=")">
+			#{postId}
+		</foreach>
+	</delete>
+
+	<update id="updatePost" parameterType="Post">
+		update sys_post
+		<set>
+			<if test="postCode != null and postCode != ''">post_code = #{postCode},</if>
+			<if test="postName != null and postName != ''">post_name = #{postName},</if>
+			<if test="postSort != null and postSort != ''">post_sort = #{postSort},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			update_time = sysdate()
+		</set>
+		where post_id = #{postId}
+	</update>
+
+	<insert id="insertPost" parameterType="Post"
+		useGeneratedKeys="true" keyProperty="postId">
+		insert into sys_post(
+		<if test="postId != null and postId != 0">post_id,</if>
+		<if test="postCode != null and postCode != ''">post_code,</if>
+		<if test="postName != null and postName != ''">post_name,</if>
+		<if test="postSort != null and postSort != ''">post_sort,</if>
+		<if test="status != null and status != ''">status,</if>
+		<if test="remark != null and remark != ''">remark,</if>
+		<if test="createBy != null and createBy != ''">create_by,</if>
+		create_time
+		)values(
+		<if test="postId != null and postId != 0">#{postId},</if>
+		<if test="postCode != null and postCode != ''">#{postCode},</if>
+		<if test="postName != null and postName != ''">#{postName},</if>
+		<if test="postSort != null and postSort != ''">#{postSort},</if>
+		<if test="status != null and status != ''">#{status},</if>
+		<if test="remark != null and remark != ''">#{remark},</if>
+		<if test="createBy != null and createBy != ''">#{createBy},</if>
+		sysdate()
+		)
+	</insert>
+-->
+</mapper> 
